@@ -1037,6 +1037,7 @@
       stages: stages,
       terms: terms,
       note: document.querySelector('.footer .note').innerHTML,
+      studio: document.querySelector('.footer .sign .studio').innerHTML,
       theme: {
         band: document.getElementById('bandColor').value,
         acc: document.getElementById('accColor').value,
@@ -1077,6 +1078,7 @@
     var lists = document.querySelectorAll('.terms .list');
     (d.terms || []).forEach(function(html, i){ if(lists[i]) lists[i].innerHTML = html; });
     if(d.note) document.querySelector('.footer .note').innerHTML = d.note;
+    if(d.studio) document.querySelector('.footer .sign .studio').innerHTML = d.studio;
 
     if(d.theme){
       document.getElementById('bandColor').value = d.theme.band || DEFAULTS.band;
