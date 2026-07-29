@@ -1015,6 +1015,7 @@
     document.querySelectorAll('.terms .list').forEach(function(l){ terms.push(l.innerHTML); });
 
     return {
+      docTitle: txt(document.querySelector('.doc-title')),
       docNo: txt(document.getElementById('docPrefix')) + document.getElementById('seqNo').value,
       seqNo: document.getElementById('seqNo').value,
       issueDate: document.getElementById('issueDate').value,
@@ -1059,6 +1060,7 @@
     p[1].querySelector('.name').textContent = d.senderName || '';
     p[1].querySelector('.role').textContent = d.senderRole || '';
     from[0].textContent = d.senderEmail || ''; from[1].textContent = d.senderPhone || '';
+    if(d.docTitle) document.querySelector('.doc-title').textContent = d.docTitle;
     document.querySelector('.brief h2').textContent = d.project || '';
 
     linesEl.innerHTML = '';
