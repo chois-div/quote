@@ -1162,7 +1162,12 @@
       res.list.forEach(function(q){
         var o = document.createElement('option');
         o.value = q.docNo;
-        o.textContent = q.docNo + ' · ' + (q.client || '무제') + ' · ' + fmt(q.total) + '원'
+        var proj = String(q.project || '').trim();
+        if(proj.length > 26) proj = proj.slice(0, 26) + '…';
+        o.textContent = q.docNo
+                      + ' · ' + (q.client || '클라이언트 미입력')
+                      + (proj ? ' · ' + proj : '')
+                      + ' · ' + fmt(q.total) + '원'
                       + (q.status ? ' [' + q.status + ']' : '');
         loadSel.appendChild(o);
       });
