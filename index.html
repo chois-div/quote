@@ -1102,7 +1102,7 @@
 
     window[name] = function(res){ done(res); };
     s.onerror = function(){ done(null, '스크립트를 불러오지 못했습니다'); };
-    s.src = ENDPOINT + '?callback=' + name + ''&' + params + '&_=' + Date.now();
+    s.src = ENDPOINT + '?callback=' + name + '&key=' + KEY + '&' + params + '&_=' + Date.now();
     document.body.appendChild(s);
   }
 
@@ -1140,6 +1140,7 @@
     }
     postForm.action = ENDPOINT;
     postForm.querySelector('[name=payload]').value = payload;
+    postForm.querySelector('[name=key]').value = KEY;
     postForm.submit();
     setTimeout(after, 2200);   // 응답을 읽을 수 없으므로 목록으로 확인
   }
