@@ -771,6 +771,8 @@
     none: '표기 금액은 세금이 반영되지 않은 금액입니다. 세금 처리 방식은 계약 시 협의합니다.'
   };
 
+  var LAST = { subtotal:0, discount:0, base:0, tax:0, total:0, net:0 };
+
   function calc(){
     var subtotal = 0;
     linesEl.querySelectorAll('.line').forEach(function(row){
@@ -810,6 +812,7 @@
       document.getElementById('netLine').textContent = '세금 별도 협의';
     }
 
+    LAST = { subtotal: subtotal, discount: disc, base: base, tax: tax, total: total, net: net };
     document.getElementById('subtotal').textContent = fmt(subtotal);
     document.getElementById('base').textContent = fmt(base);
     document.getElementById('grandTotal').textContent = fmt(total);
@@ -1023,13 +1026,13 @@
       senderEmail: txt(from[0]), senderPhone: txt(from[1]),
       project: txt(document.querySelector('.brief h2')),
       items: items,
-      discount: digits(document.getElementById('discount').value),
-      subtotal: digits(document.getElementById('subtotal').textContent),
-      base: digits(document.getElementById('base').textContent),
+      discount: LAST.discount,
+      subtotal: LAST.subtotal,
+      base: LAST.base,
       taxMode: document.getElementById('taxMode').value,
-      tax: digits(document.getElementById('tax').textContent),
-      total: digits(document.getElementById('grandTotal').textContent),
-      net: digits(document.getElementById('netLine').textContent),
+      tax: LAST.tax,
+      total: LAST.total,
+      net: LAST.net,
       stages: stages,
       terms: terms,
       note: document.querySelector('.footer .note').innerHTML,
