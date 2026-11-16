@@ -1410,6 +1410,15 @@
   STAGE_SEED.forEach(addStage);
   relabelStages();
   updateDocNo(); updateDates(); renumber(); calc();
+
+  // ?preset=이름 으로 열면 presets/이름.json 을 불러와 채웁니다
+  var presetName = new URLSearchParams(location.search).get('preset');
+  if(presetName && /^[a-z0-9-]+$/.test(presetName)){
+    fetch('presets/' + presetName + '.json', {cache:'no-store'})
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){ if(d) apply(d); })
+      .catch(function(){});
+  }
 })();
 </script>
 </body>
